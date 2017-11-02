@@ -122,5 +122,5 @@ Home
 
 ## Annotations / References Used
 
-1. [Chartist Docs] (http://gionkunz.github.io/chartist-js/)
-2. [Express Generator] (https://expressjs.com/en/starter/generator.html)
+1. Chartist Docs: (http://gionkunz.github.io/chartist-js/)
+2. Express Generator Docs: (https://expressjs.com/en/starter/generator.html)
