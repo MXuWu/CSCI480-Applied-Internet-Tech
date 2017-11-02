@@ -50,9 +50,9 @@ Example of Exercises created by User
 {
   deadlift: {
     name: "deadlift"
-    sets: "
-    reps:
-    goal:
+    sets: 4
+    reps: 5
+    goal: 120
   }, 
 
 }
