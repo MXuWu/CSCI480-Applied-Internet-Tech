@@ -81,8 +81,23 @@ Example of Exercises created by User
 ![list](documentation/list-slug.png)
 
 
+/ - home page
+![home](wireframe/Home.png)
 
+/add
+![add](wireframe/Add.png)
 
+/exercises
+![exercises](wireframe/Exercises.png)
+
+/workout-log
+![workout-log](wireframe/Workout\ Log.png)
+
+/new-workout
+![new-workout](wireframe/New\ Workout.png)
+
+/stats
+![stats](wireframe/Stats.png)
 
 
 ## Site map
