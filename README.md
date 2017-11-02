@@ -1,30 +1,66 @@
 The content below is an example project proposal / requirements document. Replace the text below the lines marked "__TODO__" with details specific to your project. Remove the "TODO" lines.
 
-(___TODO__: your project name_)
-
-# Shoppy Shoperson 
+# Lift Big
 
 ## Overview
 
 (___TODO__: a brief one or two paragraph, high-level description of your project_)
 
-Remembering what to buy at the grocery store is waaaaay too difficult. Also, shopping for groceries when you're hungry leads to regrettable purchases. Sooo... that's where Shoppy Shoperson comes in!
+Need a spot, bro?
+Get on track to hit those personal bests with Lift Big, your personal spotter. A completely customisable workout tracking tool to assist you in reaching your weightlifting goals.
+When logged in, users can input and save custom exercises, input number of sets and number of reps completed and save these to a workout, which is available to for the user to review. 
+ 
 
-Shoppy Shoperson is a web app that will allow users to keep track of multiple grocery lists. Users can register and login. Once they're logged in, they can create or view their grocery list. For every list that they have, they can add items to the list or cross off items.
+<!-- Remembering what to buy at the grocery store is waaaaay too difficult. Also, shopping for groceries when you're hungry leads to regrettable purchases. Sooo... that's where Shoppy Shoperson comes in!
+
+Shoppy Shoperson is a web app that will allow users to keep track of multiple grocery lists. Users can register and login. Once they're logged in, they can create or view their grocery list. For every list that they have, they can add items to the list or cross off items. -->
 
 
 ## Data Model
 
 (___TODO__: a description of your application's data and their relationships to each other_) 
 
-The application will store Users, Lists and Items
+<!-- The application will store Users, Lists and Items
 
 * users can have multiple lists (via references)
-* each list can have multiple items (by embedding)
+* each list can have multiple items (by embedding) -->
+
+Application stores Users, Exercises and Workouts
+
 
 (___TODO__: sample documents_)
 
 An Example User:
+
+```javascript
+{
+  username: "zyzz",
+  password: // password hash
+  previousWorkouts: // object of previous workouts
+  exercises: // array of custom exercises created by user
+}
+```
+
+An Example Workout using Embedded Exercises
+```javascript
+{
+  user: // a reference to a User object
+  name: "back day"
+  exercises: [
+    { name: "deadlift", sets: "4", reps: "5", weight: "100"},
+    { name: "standing back row", sets: "4", reps: "8", weight: "50"},
+  ],
+  completed: //date of workout
+}
+```
+Example of Exercises created by User
+{
+  
+
+}
+
+
+<!-- 
 
 ```javascript
 {
@@ -46,7 +82,7 @@ An Example List with Embedded Items:
   ],
   createdAt: // timestamp
 }
-```
+``` -->
 
 
 ## [Link to Commented First Draft Schema](db.js) 
@@ -81,10 +117,17 @@ Here's a [complex example from wikipedia](https://upload.wikimedia.org/wikipedia
 
 1. as non-registered user, I can register a new account with the site
 2. as a user, I can log in to the site
-3. as a user, I can create a new grocery list
+3. as a user, I can save a new exercise
+4. as a user, I can view all exercises I've created
+5. as a user, I can build a new workout
+6. as a user, I can view all my saved workouts
+
+
+
+<!-- 3. as a user, I can create a new grocery list
 4. as a user, I can view all of the grocery lists I've created in a single list
 5. as a user, I can add items to an existing grocery list
-6. as a user, I can cross off items in an existing grocery list
+6. as a user, I can cross off items in an existing grocery list -->
 
 ## Research Topics
 
@@ -107,6 +150,8 @@ Here's a [complex example from wikipedia](https://upload.wikimedia.org/wikipedia
 ## [Link to Initial Main Project File](app.js) 
 
 (___TODO__: create a skeleton Express application with a package.json, app.js, views folder, etc. ... and link to your initial app.js_)
+
+[app.js](app.js)
 
 ## Annotations / References Used
 
