@@ -18,9 +18,6 @@ Application stores Users, Exercises and Workouts
 * users can save multiple exercises, each exercise has required properties to fill
 * users can save multipled workouts, which consist of a collection of exercises
 
-
-(___TODO__: sample documents_)
-
 An Example User:
 
 ```javascript
@@ -62,11 +59,7 @@ Example of Exercises created by User
 
 [db.js](db.js)
 
-(___TODO__: create a first draft of your Schemas in db.js and link to it_)
-
 ## Wireframes
-
-(___TODO__: wireframes for all of the pages on your site; they can be as simple as photos of drawings or you can use a tool like Balsamiq, Omnigraffle, etc._)
 
 / - home page
 
