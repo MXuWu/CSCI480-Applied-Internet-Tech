@@ -82,11 +82,11 @@ Example of Exercises created by User
 
 /workout-log
 
-![workout-log](wireframe/Workout\ Log.png)
+![workout-log](wireframe/Workout-Log.png)
 
 /new-workout
 
-![new-workout](wireframe/New\ Workout.png)
+![new-workout](wireframe/New-Workout.png)
 
 /stats
 
