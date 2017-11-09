@@ -1,0 +1,50 @@
+const express = require('express');
+const router = express.Router();
+const mongoose = require('mongoose');
+require('../db');
+const Exercise = mongoose.model('Exercise');
+
+router.get('/', function(req, res) {
+    Exercise.find((err, exercises) =>{
+        if (err){
+            throw err;
+        } else {
+            res.render('exercises', {exercises: exercises});
+        }
+    })
+});
+
+router.get('/:name', function (req, res) {
+    const name = req.params.name;
+    exercises.findOne({name:name}, (err, exercise)=>{
+        res.render('exercises', {exercise:exercise});
+    });
+});
+
+router.post('/:name/delete', function(req, res){
+    const name = req.params.name;
+    Exercise.findOne({name:name}, (err, exercise)=>{
+        exercise.remove();
+        exercise.save((err) => {
+            res.redirect('/exercises');
+        });
+    });
+});
+
+router.post('/', function (req, res) {
+    const exercise = new Exercise({
+        name: req.body.name,
+        reps: req.body.reps,
+        sets: req.body.sets,
+        goal: req.body.goal
+    });
+    exercise.save((err) => {
+        if (err) {
+            throw err;
+        } else {
+            res.redirect('/exercises');
+        }
+    });
+});
+
+module.exports = router;

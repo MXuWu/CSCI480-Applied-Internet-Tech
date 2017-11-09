@@ -1,0 +1,24 @@
+User added exercises: 
+{{#each exercises as |exercise|}}
+<p class="exerciseDisplay">
+    {{name}} for {{sets}} sets x {{reps}} reps goal is {{goal}}kg
+    <form action="/exercises/{{name}}/delete" method="post">
+        <input type="submit" name="{{name}}" value="Delete Exercise">
+    </form>
+</p>
+{{/each}}
+
+<form action="" method="post">
+    <h2>Create an Exercise:</h2>
+    <p>
+        Exercise Name:
+        <input type="text" name="name" id=""> Number of Sets:
+        <input type="number" name="sets" id=""> Number of Reps:
+        <input type="number" name="reps" id=""> Goal:
+        <input type="number" name="goal" id=""> kg
+    </p>
+    <p>
+        <input type="submit" value="Add">
+    </p>
+
+</form>
