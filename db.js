@@ -1,5 +1,7 @@
 // db.js
 const mongoose = require('mongoose');
+const URLSlugs = require('mongoose-url-slugs');
+
 
 mongoose.Promise = global.Promise;
 
@@ -23,6 +25,8 @@ const Workout = new mongoose.Schema({
 mongoose.model('Exercise', Exercise);
 mongoose.model('Workout', Workout);
 
+Exercise.plugin(URLSlugs('name'));
+Workout.plugin(URLSlugs('name'));
 
 let dbconf;
 // is the environment variable, NODE_ENV, set to PRODUCTION? 
