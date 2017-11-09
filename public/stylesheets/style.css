@@ -1,8 +1,20 @@
 body {
+  background-color: rgb(196, 219, 248);
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
+h1 {
+  font: "Lucida Grande", Helvetica, Arial, sans-serif;
+  color: rgb(76, 196, 240);
+}
+
+
 a {
-  color: #00B7FF;
+  color: rgb(76, 196, 240);
+}
+
+
+#LiftBig{
+  text-align: center;
 }
