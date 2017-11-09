@@ -33,7 +33,7 @@ if (process.env.NODE_ENV === 'PRODUCTION') {
     const path = require('path');
     const fn = path.join(__dirname, 'config.json');
     const data = fs.readFileSync(fn);
-   
+
     // our configuration file will be in json, so parse it and set the
     // conenction string appropriately!
     const conf = JSON.parse(data);
@@ -45,4 +45,4 @@ if (process.env.NODE_ENV === 'PRODUCTION') {
 
 
 // mongoose.connect('mongodb://localhost/liftbig', {useMongoClient:true});
-mongoose.connect(dbconf, {useMongoClient:true});
+mongoose.connect(dbconf, { useMongoClient: true });
