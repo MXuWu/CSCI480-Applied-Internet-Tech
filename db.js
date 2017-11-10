@@ -8,7 +8,7 @@ mongoose.Promise = global.Promise;
 
 // schema
 const Exercise = new mongoose.Schema({
-    name: String,
+    name: {type: String, required: true},
     reps: Number,
     sets: Number,
     goal: Number

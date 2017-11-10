@@ -16,10 +16,16 @@ router.get('/', function(req, res) {
 
 router.get('/:name', function (req, res) {
     const name = req.params.name;
-    exercises.findOne({name:name}, (err, exercise)=>{
-        res.render('exercises', {exercise:exercise});
+    Exercise.findOne({name:name}, (err, exercise)=>{
+        res.render('name', {exercise:exercise});
     });
 });
+
+router.post('/:name/edit', function(req, res) {
+    const name = req.body.name;
+    
+});
+
 
 router.post('/:name/delete', function(req, res){
     const name = req.params.name;
