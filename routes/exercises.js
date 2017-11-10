@@ -5,13 +5,14 @@ require('../db');
 const Exercise = mongoose.model('Exercise');
 
 router.get('/', function(req, res) {
-    Exercise.find((err, exercises) =>{
-        if (err){
-            throw err;
-        } else {
-            res.render('exercises', {exercises: exercises});
-        }
-    })
+    res.render('exercises');
+    // Exercise.find((err, exercises) =>{
+    //     if (err){
+    //         throw err;
+    //     } else {
+    //         res.render('exercises', {exercises: exercises});
+    //     }
+    // })
 });
 
 router.get('/:name', function (req, res) {
@@ -23,7 +24,7 @@ router.get('/:name', function (req, res) {
 
 router.post('/:name/edit', function(req, res) {
     const name = req.body.name;
-    
+
 });
 
 
