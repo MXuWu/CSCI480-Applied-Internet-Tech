@@ -1,0 +1,24 @@
+{{#if workouts}} 
+    {{#each workouts as |Workout|}}
+        <p class="workoutDisplay">
+            {{name}} completed on {{completionDate}}
+            <form action="/workouts/{{slug}}/delete" method="post">
+                <input type="submit" name="{{slug}}" value="Delete Workout">
+            </form>
+            <form action="/workouts/{{slug}}/edit" method="post">
+                <input type="submit" name="{{slug}}" value="Edit Workout">
+            </form>
+        </p>
+    {{/each}} 
+{{/if}}
+<form action="" method="post">
+    <h2>Log a Workout</h2>
+    <p>
+        Workout:
+        <input type="text" name="name" id=""> Completed:
+        <input type="date" name="completionDate" id="">
+    </p>
+    <p>
+        <input type="submit" value="Log">
+    </p>
+</form>
