@@ -17,7 +17,7 @@ const Exercise = new mongoose.Schema({
 const Workout = new mongoose.Schema({
     name: String,
     exercises: Array,
-    completed: Date,
+    completionDate: String,
 })
 
 // create model, "register it"
@@ -26,7 +26,7 @@ mongoose.model('Exercise', Exercise);
 mongoose.model('Workout', Workout);
 
 Exercise.plugin(URLSlugs('name'));
-Workout.plugin(URLSlugs('name'));
+Workout.plugin(URLSlugs('name completionDate'));
 
 let dbconf;
 // is the environment variable, NODE_ENV, set to PRODUCTION? 
