@@ -9,6 +9,8 @@ const index = require('./routes/index');
 const users = require('./routes/users');
 const exercises = require('./routes/exercises');
 const chart = require('./routes/chart');
+const workouts = require('./routes/workouts');
+
 
 const app = express();
 
@@ -23,6 +25,7 @@ app.use('/', index);
 app.use('/users', users);
 app.use('/exercises', exercises);
 app.use('/chart', chart);
+app.use('/workouts', workouts);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
