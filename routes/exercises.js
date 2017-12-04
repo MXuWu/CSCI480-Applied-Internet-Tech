@@ -21,15 +21,16 @@ router.get('/:name', function (req, res) {
     });
 });
 
-router.post('/:name/edit', function(req, res) {
-    const name = req.body.name;
+router.post('/:id/edit', function(req, res) {
+    const id = req.body.id; 
+    
 
 });
 
 
-router.post('/:name/delete', function(req, res){
-    const name = req.params.name;
-    Exercise.findOne({name:name}, (err, exercise)=>{
+router.post('/:id/delete', function(req, res){
+    const id = req.params.id;
+    Exercise.findOne({_id:id}, (err, exercise)=>{
         exercise.remove();
         exercise.save((err) => {
             res.redirect('/exercises');

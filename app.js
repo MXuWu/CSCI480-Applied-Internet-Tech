@@ -3,16 +3,24 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const session = require("express-session");
 
+
+const passport = require('passport');
+LocalStrategy = require('passport-local').Strategy;
 
 const index = require('./routes/index');
 const users = require('./routes/users');
 const exercises = require('./routes/exercises');
 const chart = require('./routes/chart');
 const workouts = require('./routes/workouts');
-
+const log = require('./routes/log');
+const login = require('./routes/login');
 
 const app = express();
+
+
+
 
 // view engine setup
 app.set('view engine', 'hbs');
@@ -20,12 +28,17 @@ app.set('view engine', 'hbs');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 app.use('/', index);
 app.use('/users', users);
 app.use('/exercises', exercises);
 app.use('/chart', chart);
 app.use('/workouts', workouts);
+app.use('/log', log);
+app.use('/login', login);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

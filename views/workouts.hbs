@@ -2,11 +2,11 @@
     {{#each workouts as |Workout|}}
         <p class="workoutDisplay">
             {{name}} completed on {{completionDate}}
-            <form action="/workouts/{{slug}}/delete" method="post">
-                <input type="submit" name="{{slug}}" value="Delete Workout">
+            <form action="/workouts/{{_id}}/delete" method="post">
+                <input type="submit" name="{{name}}" value="Delete Workout">
             </form>
-            <form action="/workouts/{{slug}}/edit" method="post">
-                <input type="submit" name="{{slug}}" value="Edit Workout">
+            <form action="/workouts/{{name}}/edit" method="post">
+                <input type="submit" name="{{_id}}" value="Edit Workout">
             </form>
         </p>
     {{/each}} 

@@ -15,14 +15,18 @@ router.get('', function(req, res) {
 });
 
 
-router.post('/:slug/delete', function(req, res){
-    const slug = req.params.slug;
-    Workout.findOne({slug:slug}, (err, workout)=>{
+router.post('/:id/delete', function(req, res){
+    const id = req.params.id;
+    Workout.findOne({_id:id}, (err, workout)=>{
         workout.remove();
         workout.save((err) => {
             res.redirect('/workouts');
         });
     });
+});
+
+router.post('/:id/edit', function(req, res) {
+    const id = req.params.id;
 });
 
 router.post('', function(req, res) {
