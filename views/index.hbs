@@ -1,6 +1,17 @@
+
+{{#unless user}}
 <h1> Welcome to Lift Big</h1>
+<p>
+<a href="/login">Log In</a>
+</p>
 
-<a href="/login"> Log In</a>
+<p>
+<a href ="/register">Create Account</a>
+</p>
+{{/unless}}
 
+{{#if user}}
+<h2>Welcome {{user.username}}</h2>
+{{/if}}
 <a href="/exercises"><h2>Exercises</h2></a>
 <a href="/workouts"><h2>Workouts</h2></a>

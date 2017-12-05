@@ -11,7 +11,7 @@ router.get('/', function(req, res) {
         } else {
             res.render('exercises', {exercises: exercises});
         }
-    })
+    });
 });
 
 router.get('/:name', function (req, res) {
@@ -23,7 +23,6 @@ router.get('/:name', function (req, res) {
 
 router.post('/:id/edit', function(req, res) {
     const id = req.body.id; 
-    
 
 });
 

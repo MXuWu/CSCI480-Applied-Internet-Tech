@@ -4,18 +4,23 @@ body {
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
-h1 {
+h1,h2 {
     font: "Lucida Grande", Helvetica, Arial, sans-serif;
-    color: rgb(76, 196, 240);
+    color: rgb(13, 138, 184);
 }
 
 
+
 a {
-    color: rgb(76, 196, 240);
+    color: rgb(13, 138, 184);
 }
 
 .exerciseDisplay{
     border: 1px solid blue;
+}
+
+.errorMessage{
+    color: red;
 }
 
 #LiftBig{

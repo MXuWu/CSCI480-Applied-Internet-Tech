@@ -1,7 +1,7 @@
 // db.js
 const mongoose = require('mongoose');
 const URLSlugs = require('mongoose-url-slugs');
-
+const passportLocalMongoose = require('passport-local-mongoose');
 
 mongoose.Promise = global.Promise;
 
@@ -17,17 +17,17 @@ const Exercise = new mongoose.Schema({
 const Workout = new mongoose.Schema({
     name: String,
     exercises: Array,
-})
+});
 
 const Log = new mongoose.Schema({
     workout: Workout,
     completionDate: String,
-})
+});
 
 const User = new mongoose.Schema({
     username: String,
     password: String
-})
+});
 
 
 // create model, "register it"
@@ -35,10 +35,14 @@ const User = new mongoose.Schema({
 mongoose.model('Exercise', Exercise);
 mongoose.model('Workout', Workout);
 mongoose.model('Log', Log);
-mongoose.model('User', User);
+// mongoose.model('User', User);
 
 Exercise.plugin(URLSlugs('name'));
 Log.plugin(URLSlugs('name completionDate'));
+
+User.plugin(passportLocalMongoose);
+module.exports = mongoose.model('User', User);
+
 
 let dbconf;
 // is the environment variable, NODE_ENV, set to PRODUCTION? 
