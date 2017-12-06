@@ -5,38 +5,63 @@ require('../db');
 const Exercise = mongoose.model('Exercise');
 
 router.get('/', function(req, res) {
-    if(req.user){
         Exercise.find((err, exercises) =>{
             if (err){
                 throw err;
             } else {
-                exercises = exercises.filter((ele) => {
-                    if(ele.user){
-                        console.log("ele.user._id = " + ele.user._id);
-                        console.log("req.user._id = " + req.user._id);
-                    }
-                    if (!ele.user || ele.user._id === req.user._id){
-                        return true;
-                    }
-                    return false;
-                });
-                res.render('exercises', {exercises: exercises});
+                if (req.user){
+                    exercises = exercises.filter((ele) => {
+                        if (!ele.user || ele.user._id === req.user._id){
+                            return true;
+                        }
+                        return false;
+                    })
+                    res.render('exercises', {exercises: exercises, loggedIn: true});
+                } else {
+                    exercises = exercises.filter((ele) => {
+                        if(!ele.user){
+                            return true;
+                        }
+                        return false;
+                    });
+                    res.render('exercises', {exercises: exercises, loggedIn: false});
+                }
             }
         });
-    } else {
-        res.render('exercises', {loggedIn: false});
-    }
 });
 
-router.get('/:name', function (req, res) {
-    const name = req.params.name;
-    Exercise.findOne({name:name}, (err, exercise)=>{
-        res.render('name', {exercise:exercise});
+router.get('/:id/edit', function (req, res) {
+    const id = req.params.id;
+    Exercise.findOne({_id:id}, (err, exercise)=>{
+        res.render('edit', {exercise:exercise});
     });
 });
 
 router.post('/:id/edit', function(req, res) {
-    const id = req.body.id; 
+    const id = req.params.id; 
+    Exercise.findOne({_id:id}, (err, exercise)=>{
+        if(err){
+            throw err;
+        } else {
+            console.log(req.body.goal);
+            if(req.body.name){
+                exercise.name = req.body.name;
+            } 
+            if(req.body.sets){
+                exercise.sets = req.body.sets;
+            }
+            if(req.body.reps){
+                exercise.reps = req.body.reps;
+            }
+            if(req.body.goal){
+                console.log("exercise.goal = " + exercise.goal);
+                exercise.goal = req.body.goal;
+            }
+            exercise.save(()=>{
+                res.redirect('/exercises/' + id +'/edit');
+            });
+        }
+    });
 
 });
 

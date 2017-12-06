@@ -3,21 +3,25 @@ const router = express.Router();
 const mongoose = require('mongoose');
 require('../db');
 const Workout = mongoose.model('Workout');
+const Exercise = mongoose.model('Exercise');
 
-router.get('', function(req, res) {
-    Workout.find((err, workouts)=>{
-        if (err){
+router.get('/', function (req, res) {
+    Workout.find((err, workouts) => {
+        workouts.filter()
+        if (err) {
             throw err;
         } else {
-            res.render('workouts', {workouts: workouts});
+            Exercise.find((err, exercises) => {
+                res.render('workouts', { workouts: workouts, exercises: exercises, user: req.user});
+            });
         }
     });
 });
 
 
-router.post('/:id/delete', function(req, res){
+router.post('/:id/delete', function (req, res) {
     const id = req.params.id;
-    Workout.findOne({_id:id}, (err, workout)=>{
+    Workout.findOne({ _id: id }, (err, workout) => {
         workout.remove();
         workout.save((err) => {
             res.redirect('/workouts');
@@ -25,22 +29,29 @@ router.post('/:id/delete', function(req, res){
     });
 });
 
-router.post('/:id/edit', function(req, res) {
+router.post('/:id/edit', function (req, res) {
     const id = req.params.id;
 });
 
-router.post('', function(req, res) {
+router.post('/', function (req, res) {
     const workout = new Workout({
-        name: req.body.name,
-        completionDate: req.body.completionDate.toString()
-    });    
-    workout.save((err) => {
-        if (err){
+        name: req.body.name
+    });
+    Exercise.find({ '_id': { $in: req.body.exerciseList } }, (err, exercises) => {
+        if (err) {
             throw err;
         } else {
-            res.redirect('/workouts');
+            workout.exercises = exercises;
+            workout.save((err) => {
+                if (err) {
+                    throw err;
+                } else {
+                    res.redirect('/workouts');
+                }
+            });
         }
-    })
+    });
+
 });
 
 module.exports = router;

@@ -1,29 +1,38 @@
-{{#unless loggedIn}}
-    Sorry you need to be logged in!
-{{/unless}}
-Exercises: 
+{{!-- {{#if loggedIn}} --}}
+<h2>Exercises: </h2>
 {{#each exercises as |exercise|}}
 <p class="exerciseDisplay">
-    {{name}} for {{sets}} sets x {{reps}} reps goal is {{goal}}kg
-    <form action="/exercises/{{name}}/delete" method="post">
+    {{name}} for <b>{{sets}}</b> sets x <b>{{reps}}</b> reps goal is <b>{{goal}}kg</b>
+    <form action="/exercises/{{_id}}/delete" method="post">
         <input type="submit" name="{{name}}" value="Delete Exercise">
     </form>
-    <form action="/exercises/{{name}}/edit" method="post">
+    <form action="/exercises/{{_id}}/edit" method="get">
         <input type="submit" name="{{name}}" value="Edit Exercise">
     </form>
 </p>
 {{/each}}
 
 <form action="" method="post">
-    <h2>Create an Exercise:</h2>
+    <h2>Create New Exercise:</h2>
     <p>
+        <p>
         Exercise Name:
-        <input type="text" name="name" id=""> Number of Sets:
-        <input type="number" name="sets" id=""> Number of Reps:
-        <input type="number" name="reps" id=""> Goal:
+        <input type="text" name="name" id="">
+        </p>
+        <p>
+        Number of Sets:
+        <input type="number" name="sets" id=""> 
+        </p>
+        <p>
+        Number of Reps:
+        <input type="number" name="reps" id=""> 
+        </p>
+        <p>
+        Goal:
         <input type="number" name="goal" id=""> kg
+        </p>
     </p>
     <p>
-        <input type="submit" value="Add">
+        <input type="submit" value="Add Exercise">
     </p>
 </form>

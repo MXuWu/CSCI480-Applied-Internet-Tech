@@ -30,3 +30,7 @@ a {
 #logout{
     text-align: right;
 }
+
+.workoutHeader{
+    color: rgb(13, 138, 184);
+}

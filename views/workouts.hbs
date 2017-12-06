@@ -1,22 +1,37 @@
 {{#if workouts}} 
     {{#each workouts as |Workout|}}
-        <p class="workoutDisplay">
-            {{name}} completed on {{completionDate}}
+        <div class="workoutDisplay">
+            <h3 class="workoutHeader">{{name}}:</h3>
+            Exercises:
+            <ul class="exerciseList">
+            {{#each exercises as |exercise|}}
+                <li class="exerciseListItem">{{exercise.name}}</li>
+            {{/each}}
+            </ul>
             <form action="/workouts/{{_id}}/delete" method="post">
                 <input type="submit" name="{{name}}" value="Delete Workout">
             </form>
-            <form action="/workouts/{{name}}/edit" method="post">
-                <input type="submit" name="{{_id}}" value="Edit Workout">
+            <form action="/workouts/{{_id}}/edit" method="post">
+                <input type="submit" name="{{name}}" value="Edit Workout">
             </form>
-        </p>
+        </div>
     {{/each}} 
 {{/if}}
 <form action="" method="post">
     <h2>Log a Workout</h2>
     <p>
         Workout:
-        <input type="text" name="name" id=""> Completed:
-        <input type="date" name="completionDate" id="">
+        <input type="text" name="name" id=""> 
+    </p>
+    <p>
+        Add Exercises:
+        {{#each exercises as |exercise|}}
+            <p>
+            <input type="checkbox" value={{_id}} name="exerciseList" id="">
+            <label for="{{name}}">{{name}}</label>
+            </p>
+        {{/each}}
+        </select>
     </p>
     <p>
         <input type="submit" value="Log">

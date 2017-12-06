@@ -37,7 +37,6 @@ module.exports = {
 
         "camelcase": ["error", {properties: "never"}],
         "func-call-spacing": ["error"],
-        "no-lonely-if": ["error"],
         "array-bracket-spacing": ["error"],
 
         "no-console": ["off"],
