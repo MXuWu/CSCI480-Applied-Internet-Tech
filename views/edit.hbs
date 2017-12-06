@@ -1,0 +1,29 @@
+<h2>Edit exercise</h2>
+    <h3 class="workoutHeader">{{exercise.name}}</h3>
+    <b>{{exercise.sets}} </b> x Sets
+    <b>{{exercise.reps}} </b> x Reps
+    <p>
+    Goal: <b>{{exercise.goal}}</b>kg 
+    </p>
+<form action="" method="post">
+    <p>
+        Exercise Name:
+        <input type="text" name="name" placeholder="{{exercise.name}}" id=""> 
+    </p>
+    <p>
+        Number of Sets:
+        <input type="number" name="sets" placeholder="{{exercise.sets}}" id=""> 
+    </p>
+    <p>
+        Number of Reps:
+        <input type="number" name="reps" placeholder="{{exercise.reps}}" id=""> 
+    </p>
+    <p>
+        Goal:
+        <input type="number" name="goal" placeholder="{{exercise.goal}}" id=""> kg
+    </p>
+
+    <p>
+        <input type="submit" value="Update Exercise">
+    </p>
+</form>
