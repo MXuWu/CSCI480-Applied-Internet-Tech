@@ -1,7 +1,8 @@
 body {
-    background-color: rgb(196, 219, 248);
     padding: 50px;
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    background: rgb(178, 197, 197);
+    text-align: center;
 }
 
 h1,h2 {
@@ -9,18 +10,42 @@ h1,h2 {
     color: rgb(13, 138, 184);
 }
 
-
-
 a {
     color: rgb(13, 138, 184);
 }
 
+div{
+    margin: 5px;
+}
+
+.create{
+    margin-top: 40px;
+}
+
+.content{
+    width: 1200px;
+    margin: 70px auto;
+    height: 1000em;
+    padding: 10px;
+    background-color: rgb(178, 197, 197);
+    text-align: left;
+}
+
 .exerciseDisplay{
-    border: 1px solid blue;
+    /* border: 1px solid blue;/ */
 }
 
 .errorMessage{
     color: red;
+}
+.header{
+    padding: 10px;
+    background-color: rgb(32, 89, 105);
+    height:100px;
+    /* background:#F0F0F0; */
+    border:1px solid #CCC;
+    width:100em;
+    margin:0px auto;
 }
 
 #LiftBig{
@@ -28,9 +53,10 @@ a {
 }
 
 #logout{
-    text-align: right;
+    text-align: left;
 }
 
 .workoutHeader{
+
     color: rgb(13, 138, 184);
 }

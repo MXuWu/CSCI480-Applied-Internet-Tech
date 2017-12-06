@@ -15,7 +15,7 @@ router.get('/', function(req, res) {
                             return true;
                         }
                         return false;
-                    })
+                    });
                     res.render('exercises', {exercises: exercises, loggedIn: true});
                 } else {
                     exercises = exercises.filter((ele) => {
@@ -28,6 +28,25 @@ router.get('/', function(req, res) {
                 }
             }
         });
+});
+
+
+router.post('/', function (req, res) {
+    console.log(req.user, "added an exercise");
+    const exercise = new Exercise({
+        name: req.body.name,
+        reps: req.body.reps,
+        sets: req.body.sets,
+        goal: req.body.goal,
+        user: req.user
+    });
+    exercise.save((err) => {
+        if (err) {
+            throw err;
+        } else {
+            res.redirect('/exercises');
+        }
+    });
 });
 
 router.get('/:id/edit', function (req, res) {
@@ -70,28 +89,11 @@ router.post('/:id/delete', function(req, res){
     const id = req.params.id;
     Exercise.findOne({_id:id}, (err, exercise)=>{
         exercise.remove();
-        exercise.save((err) => {
+        exercise.save(() => {
             res.redirect('/exercises');
         });
     });
 });
 
-router.post('/', function (req, res) {
-    console.log(req.user, "added an exercise");
-    const exercise = new Exercise({
-        name: req.body.name,
-        reps: req.body.reps,
-        sets: req.body.sets,
-        goal: req.body.goal,
-        user: req.user
-    });
-    exercise.save((err) => {
-        if (err) {
-            throw err;
-        } else {
-            res.redirect('/exercises');
-        }
-    });
-});
 
 module.exports = router;

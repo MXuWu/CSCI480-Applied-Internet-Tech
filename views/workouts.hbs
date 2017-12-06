@@ -1,4 +1,6 @@
+<div>
 {{#if workouts}} 
+    <h2>Workouts</h2>
     {{#each workouts as |Workout|}}
         <div class="workoutDisplay">
             <h3 class="workoutHeader">{{name}}:</h3>
@@ -17,8 +19,11 @@
         </div>
     {{/each}} 
 {{/if}}
+</div>
+</p>
+<div class="create">
 <form action="" method="post">
-    <h2>Log a Workout</h2>
+    <h2>Create a Workout</h2>
     <p>
         Workout:
         <input type="text" name="name" id=""> 
@@ -34,6 +39,7 @@
         </select>
     </p>
     <p>
-        <input type="submit" value="Log">
+        <input type="submit" value="Add Workout">
     </p>
 </form>
+</div>

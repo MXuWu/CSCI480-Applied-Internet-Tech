@@ -7,11 +7,25 @@ const Exercise = mongoose.model('Exercise');
 
 router.get('/', function (req, res) {
     Workout.find((err, workouts) => {
-        workouts.filter()
         if (err) {
             throw err;
         } else {
             Exercise.find((err, exercises) => {
+                if (req.user){
+                    exercises = exercises.filter((ele) => {
+                        if (!ele.user || ele.user._id === req.user._id){
+                            return true;
+                        }
+                        return false;
+                    });
+                } else {
+                    exercises = exercises.filter((ele) => {
+                        if (!ele.user){
+                            return true;
+                        }
+                        return false;
+                    });
+                }
                 res.render('workouts', { workouts: workouts, exercises: exercises, user: req.user});
             });
         }
@@ -35,7 +49,8 @@ router.post('/:id/edit', function (req, res) {
 
 router.post('/', function (req, res) {
     const workout = new Workout({
-        name: req.body.name
+        name: req.body.name,
+        user: req.user
     });
     Exercise.find({ '_id': { $in: req.body.exerciseList } }, (err, exercises) => {
         if (err) {

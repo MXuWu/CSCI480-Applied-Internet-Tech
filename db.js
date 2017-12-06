@@ -7,8 +7,13 @@ mongoose.Promise = global.Promise;
 
 
 // schema
+const User = new mongoose.Schema({
+    username: String,
+    password: String
+});
+
 const Exercise = new mongoose.Schema({
-    user: String,
+    user: User,
     name: {type: String, required: true},
     reps: Number,
     sets: Number,
@@ -16,19 +21,17 @@ const Exercise = new mongoose.Schema({
 });
 
 const Workout = new mongoose.Schema({
+    user: User,
     name: String,
     exercises: Array,
 });
 
 const Log = new mongoose.Schema({
+    user: User,
     workout: Workout,
-    completionDate: String,
+    date: String,
 });
 
-const User = new mongoose.Schema({
-    username: String,
-    password: String
-});
 
 
 // create model, "register it"
@@ -40,10 +43,11 @@ mongoose.model('Log', Log);
 
 Log.plugin(URLSlugs('name completionDate'));
 
+// implement passport-local-mongoose plugin
 User.plugin(passportLocalMongoose);
 module.exports = mongoose.model('User', User);
 
-
+// set database in production/development mode
 let dbconf;
 // is the environment variable, NODE_ENV, set to PRODUCTION? 
 if (process.env.NODE_ENV === 'PRODUCTION') {
@@ -63,6 +67,4 @@ if (process.env.NODE_ENV === 'PRODUCTION') {
     dbconf = 'mongodb://localhost/liftbig';
 }
 
-
-// mongoose.connect('mongodb://localhost/liftbig', {useMongoClient:true});
 mongoose.connect(dbconf, { useMongoClient: true });
