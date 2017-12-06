@@ -8,6 +8,7 @@ mongoose.Promise = global.Promise;
 
 // schema
 const Exercise = new mongoose.Schema({
+    user: String,
     name: {type: String, required: true},
     reps: Number,
     sets: Number,
@@ -37,7 +38,6 @@ mongoose.model('Workout', Workout);
 mongoose.model('Log', Log);
 // mongoose.model('User', User);
 
-Exercise.plugin(URLSlugs('name'));
 Log.plugin(URLSlugs('name completionDate'));
 
 User.plugin(passportLocalMongoose);

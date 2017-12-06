@@ -5,13 +5,27 @@ require('../db');
 const Exercise = mongoose.model('Exercise');
 
 router.get('/', function(req, res) {
-    Exercise.find((err, exercises) =>{
-        if (err){
-            throw err;
-        } else {
-            res.render('exercises', {exercises: exercises});
-        }
-    });
+    if(req.user){
+        Exercise.find((err, exercises) =>{
+            if (err){
+                throw err;
+            } else {
+                exercises = exercises.filter((ele) => {
+                    if(ele.user){
+                        console.log("ele.user._id = " + ele.user._id);
+                        console.log("req.user._id = " + req.user._id);
+                    }
+                    if (!ele.user || ele.user._id === req.user._id){
+                        return true;
+                    }
+                    return false;
+                });
+                res.render('exercises', {exercises: exercises});
+            }
+        });
+    } else {
+        res.render('exercises', {loggedIn: false});
+    }
 });
 
 router.get('/:name', function (req, res) {
@@ -38,11 +52,13 @@ router.post('/:id/delete', function(req, res){
 });
 
 router.post('/', function (req, res) {
+    console.log(req.user, "added an exercise");
     const exercise = new Exercise({
         name: req.body.name,
         reps: req.body.reps,
         sets: req.body.sets,
-        goal: req.body.goal
+        goal: req.body.goal,
+        user: req.user
     });
     exercise.save((err) => {
         if (err) {

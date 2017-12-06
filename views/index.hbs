@@ -12,6 +12,13 @@
 
 {{#if user}}
 <h2>Welcome {{user.username}}</h2>
+
+<div id="logout">
+    <a href="/logout">Log out</a>
+</div>
+
+<a href="/exercises"><h3>Exercises</h3></a>
+<a href="/workouts"><h3>Workouts</h3></a>
+<a href="/logs"><h3>Logs</h3></a>
+
 {{/if}}
-<a href="/exercises"><h2>Exercises</h2></a>
-<a href="/workouts"><h2>Workouts</h2></a>

@@ -1,4 +1,7 @@
-User added exercises: 
+{{#unless loggedIn}}
+    Sorry you need to be logged in!
+{{/unless}}
+Exercises: 
 {{#each exercises as |exercise|}}
 <p class="exerciseDisplay">
     {{name}} for {{sets}} sets x {{reps}} reps goal is {{goal}}kg

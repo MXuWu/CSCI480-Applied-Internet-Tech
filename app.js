@@ -9,7 +9,7 @@ const flash = require('connect-flash');
 // set up passport
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-const passportLocalMongoose = require('passport-local-mongoose');
+// const passportLocalMongoose = require('passport-local-mongoose');
 
 // routes
 const index = require('./routes/index');
@@ -20,6 +20,7 @@ const workouts = require('./routes/workouts');
 const log = require('./routes/log');
 const login = require('./routes/login');
 const register = require('./routes/register');
+const logout = require('./routes/logout');
 
 const app = express();
 
@@ -57,6 +58,7 @@ app.use('/workouts', workouts);
 app.use('/log', log);
 app.use('/login', login);
 app.use('/register', register);
+app.use('/logout', logout);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
