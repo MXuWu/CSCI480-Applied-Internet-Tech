@@ -13,7 +13,7 @@ router.get('/', function (req, res) {
             Exercise.find((err, exercises) => {
                 if (req.user){
                     exercises = exercises.filter((ele) => {
-                        if (!ele.user || ele.user._id === req.user._id){
+                        if (!ele.user || ele.user.id === req.user.id){
                             return true;
                         }
                         return false;
@@ -43,8 +43,11 @@ router.post('/:id/delete', function (req, res) {
     });
 });
 
-router.post('/:id/edit', function (req, res) {
+router.get('/:id/edit', function (req, res) {
     const id = req.params.id;
+    Workout.findOne({_id:id}, (err, workout)=>{
+        res.render('editExercise', {workout:workout});
+    });
 });
 
 router.post('/', function (req, res) {

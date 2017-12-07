@@ -44,4 +44,21 @@ router.post('/', function(req, res) {
     });
 });
 
+router.get('/:id/edit', function (req, res) {
+    const id = req.params.id;
+    Log.findOne({_id:id}, (err, log)=>{
+        res.render('edit', {log:log});
+    });
+});
+
+router.post('/:id/delete', function (req, res) {
+    const id = req.params.id;
+    Log.findOne({ _id: id }, (err, log) => {
+        log.remove();
+        log.save(() => {
+            res.redirect('/log');
+        });
+    });
+});
+
 module.exports = router;

@@ -10,8 +10,22 @@ router.get('/', function(req, res) {
                 throw err;
             } else {
                 if (req.user){
-                    exercises = exercises.filter((ele) => {
-                        if (!ele.user || ele.user._id === req.user._id){
+                    // exercises = exercises.filter((ele) => {
+                    //     if(ele.user){
+                    //         console.log("ele.user._id = " + ele.user._id);  
+                    //     }
+                    //     console.log("req.user._id = " + req.user._id);
+                    //     if (!ele.user){
+                    //         return true;
+                    //     }
+                    //     if (ele.user._id == req.user._id){
+                    //         console.log("MATCH MATCH");
+                    //         return true;
+                    //     }
+                    //     return false;
+                    // });
+                    exercises = exercises.filter((ele)=>{
+                        if(!ele.user || req.user.id === ele.user.id){
                             return true;
                         }
                         return false;
@@ -52,7 +66,7 @@ router.post('/', function (req, res) {
 router.get('/:id/edit', function (req, res) {
     const id = req.params.id;
     Exercise.findOne({_id:id}, (err, exercise)=>{
-        res.render('edit', {exercise:exercise});
+        res.render('editExercise', {exercise:exercise});
     });
 });
 

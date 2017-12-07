@@ -1,35 +1,48 @@
 <h2>Logs</h2>
 <div>
     {{#each logs as |logs|}}
-        <div class="workoutDisplay">
-           <b>{{workout.name}}</b> finished: <b>{{date}}</b>
-           <ul>
-           {{#each workout.exercises as |exercise|}}
-                <li><b>{{name}}</b>: <b>{{sets}}</b> x Sets <b>{{reps}}</b> x Reps</li> 
-           {{/each}}
-           </ul>
+    <div class="workoutDisplay">
+        <b>{{workout.name}}</b> finished:
+        <b>{{date}}</b>
+        <ul>
+            {{#each workout.exercises as |exercise|}}
+            <li>
+                <b>{{name}}</b>:
+                <b>{{sets}}</b> x Sets
+                <b>{{reps}}</b> x Reps
+            </li>
+            {{/each}}
+        </ul>
+        <form action="/log/{{_id}}/delete" method="post">
+            <input type="submit" name="{{name}}" value="Delete Log">
+        </form> 
+        <form action="/log/{{_id}}/edit" method="get">
+            <input type="submit" name="{{name}}" value="Edit Log">
+        </form>
 
-        </div>
+    </div>
     {{/each}}
 
 </div>
 
 
 <div>
-    <h2>Log a workout:</h2> 
+    <h2>Log a workout:</h2>
     <form action="/log" method="post">
         <div>
-        Workout: <select name="workout">
-            {{#each workouts as |workout|}}
-            <option value="{{name}}">{{name}}</option>
-            {{/each}}
-        </select>
+            Workout:
+            <select name="workout">
+                {{#each workouts as |workout|}}
+                <option value="{{name}}">{{name}}</option>
+                {{/each}}
+            </select>
         </div>
         <div>
-        Completed on: <input type="date" name="logDate" id="">
+            Completed on:
+            <input type="date" name="logDate" id="">
         </div>
         <div>
-        <input type="submit" value="Log Workout">
+            <input type="submit" value="Log Workout">
         </div>
     </form>
 </div>
