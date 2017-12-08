@@ -32,7 +32,6 @@ router.get('/', function(req, res) {
 
 
 router.post('/', function (req, res) {
-    console.log(req.user, "added an exercise");
     const exercise = new Exercise({
         name: req.body.name,
         reps: req.body.reps,
@@ -62,7 +61,6 @@ router.post('/:id/edit', function(req, res) {
         if(err){
             throw err;
         } else {
-            console.log(req.body.goal);
             if(req.body.name){
                 exercise.name = req.body.name;
             } 
@@ -73,7 +71,6 @@ router.post('/:id/edit', function(req, res) {
                 exercise.reps = req.body.reps;
             }
             if(req.body.goal){
-                console.log("exercise.goal = " + exercise.goal);
                 exercise.goal = req.body.goal;
             }
             exercise.save(()=>{

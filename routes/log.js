@@ -69,7 +69,7 @@ router.post('/:id/edit', function(req, res) {
 
 router.post('/:id/delete', function (req, res) {
     const id = req.params.id;
-    Log.findOne({ _id: id }, (err, log) => {
+    Log.findOne({ _id: id}, (err, log) => {
         log.remove();
         log.save(() => {
             res.redirect('/log');

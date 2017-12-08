@@ -123,10 +123,8 @@ router.post('/:id/edit', function(req, res){
         if(err){
             throw err;
         } else {
-            console.log(req.body.addedExercises);
             if(req.body.addedExercises){
                 Exercise.find({'_id': {$in: req.body.addedExercises}}, (err, exercise)=>{
-                    console.log(exercise);
                     workout.exercises = workout.exercises.concat(exercise);
                     workout.save(()=>{
                         res.redirect(`/workouts/${id}/edit`);
@@ -139,10 +137,8 @@ router.post('/:id/edit', function(req, res){
 
 router.post('/:workoutID/remove/:exerciseID', function(req, res) {
     const workoutID = req.params.workoutID;
-    console.log("workoutID: " + workoutID);
     const exerciseID = req.params.exerciseID;
     Workout.findOne({'_id': workoutID}, (err, workout) => {
-        console.log("find workout: " + workout.name);
         workout.exercises = workout.exercises.filter((exercise) => {
             if (exercise._id.equals(exerciseID)){
                 return false;
