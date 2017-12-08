@@ -7,13 +7,29 @@ const Exercise = mongoose.model('Exercise');
 
 router.get('/', function (req, res) {
     Workout.find((err, workouts) => {
+        
         if (err) {
             throw err;
         } else {
+            if(req.user){
+                workouts = workouts.filter((workout) => {
+                    if(!workout.user || workout._id.equals(req.user._id)){
+                        return true;
+                    } 
+                    return false;
+                });
+            } else {
+                workouts = workouts.filter((workout) =>{
+                    if (!workout.user){
+                        return true;
+                    } 
+                    return false;
+                });
+            }
             Exercise.find((err, exercises) => {
                 if (req.user){
                     exercises = exercises.filter((ele) => {
-                        if (!ele.user || ele.user.id === req.user.id){
+                        if (!ele.user || ele.user._id.equals(req.user._id)){
                             return true;
                         }
                         return false;
@@ -46,7 +62,36 @@ router.post('/:id/delete', function (req, res) {
 router.get('/:id/edit', function (req, res) {
     const id = req.params.id;
     Workout.findOne({_id:id}, (err, workout)=>{
-        res.render('editExercise', {workout:workout});
+        Exercise.find((err, exercises) => {
+            if (err){
+                throw err; 
+            } else {
+                if (req.user){
+                    exercises = exercises.filter((ele) => {
+                        if (!ele.user || ele.user._id.equals(req.user._id)){
+                            return true;
+                        }
+                        return false;
+                    });
+                } else {
+                    exercises = exercises.filter((ele) => {
+                        if (!ele.user){
+                            return true;
+                        }
+                        return false;
+                    });
+                }
+                exercises = exercises.filter((ele) =>{
+                    for(let i = 0; i < workout.exercises.length; i++){
+                        if (ele._id.equals(workout.exercises[i]._id)){
+                            return false;
+                        }
+                    }
+                    return true;
+                });
+                res.render('editWorkout', {workout:workout, exercises: exercises});
+            }
+        });
     });
 });
 
@@ -70,6 +115,44 @@ router.post('/', function (req, res) {
         }
     });
 
+});
+
+router.post('/:id/edit', function(req, res){
+    const id = req.params.id;
+    Workout.findOne({'_id':id}, (err, workout) =>{
+        if(err){
+            throw err;
+        } else {
+            console.log(req.body.addedExercises);
+            if(req.body.addedExercises){
+                Exercise.find({'_id': {$in: req.body.addedExercises}}, (err, exercise)=>{
+                    console.log(exercise);
+                    workout.exercises = workout.exercises.concat(exercise);
+                    workout.save(()=>{
+                        res.redirect(`/workouts/${id}/edit`);
+                    });
+                });
+            }
+        }
+    });
+});
+
+router.post('/:workoutID/remove/:exerciseID', function(req, res) {
+    const workoutID = req.params.workoutID;
+    console.log("workoutID: " + workoutID);
+    const exerciseID = req.params.exerciseID;
+    Workout.findOne({'_id': workoutID}, (err, workout) => {
+        console.log("find workout: " + workout.name);
+        workout.exercises = workout.exercises.filter((exercise) => {
+            if (exercise._id.equals(exerciseID)){
+                return false;
+            }
+            return true;
+        });
+        workout.save(()=>{
+            res.redirect(`/workouts/${workoutID}/edit`);
+        });
+    });
 });
 
 module.exports = router;

@@ -1,0 +1,33 @@
+<div>
+    <div>
+    <a href="/log"> Back </a>
+    </div>
+</div>
+
+<h2>Edit Log</h2>
+<div>
+    <div>
+    <b> Date Completed (yyyy/mm/dd):</b> {{log.date}}
+    </div>
+
+    <div>
+    <form action="/{{_id}}/edit" method="post">
+        Edit date: <input type="date" name="editDate" id="">
+        <input type="submit" value="Update">
+    </form>
+    </div>
+</div>
+<div>
+<form action="" method="post">
+{{#each log.workout.exercises as |exercise|}}
+    <h3 class="workoutHeader">{{exercise.name}}</h3>
+    <b>{{exercise.sets}} </b> x Sets
+    <b>{{exercise.reps}} </b> x Reps
+    <p>
+    </p>
+{{/each}}
+    <p>
+
+</form>
+
+</div>

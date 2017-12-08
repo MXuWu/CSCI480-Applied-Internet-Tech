@@ -1,0 +1,51 @@
+<div>
+    <a href="/workouts/"> Back </a>
+</div>
+
+<div>
+<h2>Edit {{workout.name}}</h2>
+    <div>
+    {{!-- <h3 class="workoutHeader">{{workout.name}}</h3> --}}
+    <div>
+        <form action="/workouts/{{workout.id}}/edit" method="post">
+            Name: <input type="text" placeholder="Day 2" name="workoutName" id="">
+            <input type="submit" value="Update">
+        </form>
+    </div>
+    </div>
+    <p></p>
+    <div>
+    <b>Current Exercises: </b>
+    <ul class="exerciseList">
+        {{#each workout.exercises as |workoutExercise|}}
+            <li class="exerciseListItem">{{name}}</li>
+            <div>
+            <form action="/workouts/{{@root.workout.id}}/remove/{{_id}}" method="post">
+            <input type="submit" value="Remove Exercise">
+            </div>
+            </form>
+        {{/each}}
+    </ul>
+    </div>
+
+    <div>   
+    <form action="/workouts/{{workout.id}}/edit" method="post">
+    <p>
+        <b>
+        Add Exercises:
+        </b>
+        {{#each exercises as |exercise|}}
+            <p>
+            <input type="checkbox" value={{_id}} name="addedExercises" id="">
+            <label for="{{name}}">{{name}}</label>
+            </p>
+        {{/each}}
+        </select>
+    </p>
+    <div>
+        <input type="submit" value="Add">
+    </div>
+    </div>
+</form>
+
+</div>

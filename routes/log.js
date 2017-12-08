@@ -47,7 +47,23 @@ router.post('/', function(req, res) {
 router.get('/:id/edit', function (req, res) {
     const id = req.params.id;
     Log.findOne({_id:id}, (err, log)=>{
-        res.render('edit', {log:log});
+        res.render('editLog', {log:log});
+    });
+});
+
+router.post('/:id/edit', function(req, res) {
+    const id = req.params.id;
+    Log.findOne({_id:id}, (err, log) =>{
+        if(err){
+            throw err;
+        } else {
+            if (req.body.editDate){
+                log.date = req.body.editDate;
+            }
+            log.save(()=>{
+                res.redirect(`/log/${id}/edit`);
+            });
+        }
     });
 });
 
